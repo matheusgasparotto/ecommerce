@@ -1,0 +1,44 @@
+version: '2.2'
+services:
+  db:
+    container_name: ecommerce-db
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes: 
+      - /var/lib/postgresql/data
+    networks:
+      - ecommerce
+  
+  backend:
+    container_name: ecommerce-back
+    restart: always
+    build:
+      context: .
+      dockerfile: ../backend/Dockerfile
+    volumes:
+      - ../backend:/app/backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ../backend/.env
+    depends_on:
+      - db
+    networks:
+      - ecommerce
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  ecommerce:
+    external:
+      name: ecommerce
+
+
+  
