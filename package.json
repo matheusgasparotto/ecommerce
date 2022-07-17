@@ -1,0 +1,11 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "repository": "git@github.com:matheusgasparotto/ecommerce.git",
+  "author": "Matheus Gasparotto <matheus.andradeg@outlook.com>",
+  "scripts": {
+    "prestart": "cd backend && yarn && cd ..",
+    "start": "docker-compose -f './docker/docker-compose.yml' up"
+  },
+  "license": "MIT"
+}

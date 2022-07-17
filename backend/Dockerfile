@@ -1,9 +1,5 @@
-FROM node:14-alpine as runner
+FROM node:18-alpine As development
 
-WORKDIR /app/backend
+WORKDIR /usr/src/app
 
-RUN npm install
-
-EXPOSE 3000
-
-ENTRYPOINT ["yarn", "start:dev"]
+COPY --chown=node:node . .
